@@ -17,7 +17,7 @@ def video_stream():
                 
 @app.route('/camera')
 def camera():
-    return render_template('alecobot/index.html')
+    return render_template('index.html')
 
 @app.route('/video_feed')
 def video_feed():
