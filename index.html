@@ -3,12 +3,195 @@
         <title>AlecoBot</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+        <script src="scripts/javascript.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-        
+        <img class="sec" id="cam" src="{{ url_for('video_feed') }}" />
+        <div class="sec" id="panel">
+            <div class="info">
+                
+                <table>
+                    <tbody>
+                        <tr>                            
+                            <td><input id="stop" type="radio" value="0" name="mode" checked></td>
+                            <td><label for="stop">Stop</label></td>
+                        </tr>
+                        <tr>
+                            <td><input id="manual" type="radio" value="1" name="mode"></td>
+                            <td><label for="manual">Manual</label></td>
+                        </tr>
+                        <tr>
+                            <td><input id="auto" type="radio" value="2" name="mode"></td>
+                            <td><label for="auto">Automatic</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Left Motor:</td>
+                            <td>4V</td>
+                        </tr>
+                        <tr>
+                            <td>Right Motor:</td>
+                            <td>5V</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Front:</td>
+                            <td>Go</td>
+                        </tr>
+                        <tr>
+                            <td>Rear:</td>
+                            <td class="alert">Stop</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>HC-SR04:</td>
+                            <td>134cm</td>
+                        </tr>
+                        <tr>
+                            <td>Light:</td>
+                            <td>70%</td>
+                        </tr>
+                        <tr>
+                            <td>Automatic:</td>
+                            <td><input type="checkbox" id="lightmode"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="red">R</td>
+                            <td>
+                                <div class="slidecontainer">
+                                    <input type="range" min="1" max="900" value="0" class="rgbslider" id="redslider">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="green">G</td>
+                            <td>
+                                <div class="slidecontainer">
+                                    <input type="range" min="1" max="900" value="0" class="rgbslider" id="greenslider">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blue">B</td>
+                            <td>
+                                <div class="slidecontainer">
+                                    <input type="range" min="1" max="900" value="0" class="rgbslider" id="blueslider">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                        <tr>
+                            <td>|</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Calibrating...</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>            
+        </div>
     </body>
 </html>
