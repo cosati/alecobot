@@ -23,7 +23,16 @@ def video_stream():
             ret, buffer = cv2.imencode('.jpeg', frame)
             frame = buffer.tobytes()
             yield (b' --frame\r\n' b'Content-type: image/jpeg\r\n\r\n' + frame +b'\r\n')
-                
+
+def rear_ir():
+    while True:
+        irSts = GPIO.input(rearSensor)
+        if irSts:
+            yield ("<td class=\"alert\">Stop!</td>")
+        elif not irSts:
+            yield ("<td>Go!</td>")
+        yield("<td>Lost Signal!</td>")
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -34,11 +43,6 @@ def video_feed():
 
 @app.route("/rear_sensor")
 def rear_sensor():
-    while True:
-        irSts = GPIO.input(rearSensor)
-        print(irSts)
-        if irSts:
-            return "<td class=\"alert\">Stop!</td>"
-        return "<td>Go!</td>"
+    return Response(rear_ir())
 
 app.run(host='0.0.0.0', port='5000', debug=False)
