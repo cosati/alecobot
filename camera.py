@@ -26,27 +26,18 @@ def video_stream():
                 
 @app.route('/')
 def index():
-    irSts = GPIO.input(rearSensor)
-    print(irSts)
-    if irSts:
-        rs = "<td class=\"alert\">Stop!</td>"
-    else:
-        rs = "<td>Go!</td>"
-    templateData = {
-        'rearSensor' : rs
-    }
-    return render_template('index.html', **templateData)
+    return render_template('index.html')
 
 @app.route('/video_feed')
 def video_feed():
     return Response(video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
-#@app.route("/rear_sensor")
-#def rear_sensor():
-#    irSts = GPIO.input(rearSensor)
-#    if irSts:
-#        return "<td class=\"alert\">Stop!</td>"
-#    return "<td>Go!</td>"
+@app.route("/rear_sensor")
+def rear_sensor():
+    irSts = GPIO.input(rearSensor)
+    print(irSts)
+    if irSts:
+        return "<td class=\"alert\">Stop!</td>"
+    return "<td>Go!</td>"
 
 app.run(host='0.0.0.0', port='5000', debug=True)
