@@ -9,11 +9,13 @@ app = Flask('__name__')
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-#define reverse IR sensor
+#define sensor GPIOs
 rearSensor = 7
 
+#initialize GPIO status variables
 irSts = 0
 
+#define sensor pins as input
 GPIO.setup(rearSensor, GPIO.IN)
 
 def video_stream():
