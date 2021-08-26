@@ -34,10 +34,11 @@ def video_feed():
 
 @app.route("/rear_sensor")
 def rear_sensor():
-    irSts = GPIO.input(rearSensor)
-    print(irSts)
-    if irSts:
-        return "<td class=\"alert\">Stop!</td>"
-    return "<td>Go!</td>"
+    while True:
+        irSts = GPIO.input(rearSensor)
+        print(irSts)
+        if irSts:
+            return "<td class=\"alert\">Stop!</td>"
+        return "<td>Go!</td>"
 
 app.run(host='0.0.0.0', port='5000', debug=False)
