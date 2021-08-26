@@ -40,4 +40,4 @@ def rear_sensor():
         return "<td class=\"alert\">Stop!</td>"
     return "<td>Go!</td>"
 
-app.run(host='0.0.0.0', port='5000', debug=True)
+app.run(host='0.0.0.0', port='5000', debug=False)
