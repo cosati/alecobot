@@ -12,6 +12,8 @@ GPIO.setwarnings(False)
 #define reverse IR sensor
 rearSensor = 7
 
+irSts = 0
+
 GPIO.setup(rearSensor, GPIO.IN)
 
 def video_stream():
