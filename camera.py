@@ -33,7 +33,7 @@ def rear_sensor():
     if irSts:
         rs = "<td>-</td>"
     elif not irSts:
-        rs = "<td class=\"alert\">Stop!</td>"
+        rs = '<td class=\"alert\">Stop!</td>'
     else:
         rs = "<td class=\"nosignal\">No signal!</td>"
     return rs
