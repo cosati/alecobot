@@ -59,6 +59,6 @@ def video_feed():
 
 @app.route('/ir_feed')
 def ir_feed():    
-    return Response(rear_sensor(), mimetype="text/html")
+    return Response(rear_sensor(), mimetype="text/plain")
 
 app.run(host='0.0.0.0', port='5000', debug=False)
