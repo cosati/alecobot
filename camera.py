@@ -41,11 +41,11 @@ def video_stream():
 def index():
     irSts = GPIO.input(rearSensor)
     if irSts:
-        rs = "<td class=\"alert\">Stop!</td>"
+        rs = "Stop!"
     elif not irSts:
-        rs = "<td>Go!</td>"
+        rs = "Go!"
     else:
-        rs = "<td>Lost Signal!</td>"
+        rs = "Lost Signal!"
     templateData = {
         'sensor' : rs
     }
