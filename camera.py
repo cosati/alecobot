@@ -28,15 +28,6 @@ def video_stream():
             frame = buffer.tobytes()
             yield (b' --frame\r\n' b'Content-type: image/jpeg\r\n\r\n' + frame +b'\r\n')
 
-# def rear_ir():
-#     while True:
-#         irSts = GPIO.input(rearSensor)
-#         if irSts:
-#             yield ("<td class=\"alert\">Stop!</td>")
-#         elif not irSts:
-#             yield ("<td>Go!</td>")
-#         yield("<td>Lost Signal!</td>")
-
 @app.route('/')
 def index():
     irSts = GPIO.input(rearSensor)
@@ -47,16 +38,12 @@ def index():
     else:
         rs = "Lost Signal!"
     templateData = {
-        'sensor' : rs
+        'sensor' : irSts
     }
     return render_template('index.html', **templateData)
 
 @app.route('/video_feed')
 def video_feed():
     return Response(video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-# @app.route("/rear_sensor")
-# def rear_sensor():
-#     return Response(rear_ir())
 
 app.run(host='0.0.0.0', port='5000', debug=False)
