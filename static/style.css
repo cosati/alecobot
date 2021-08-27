@@ -46,6 +46,10 @@
     font-weight: bold;
 }
 
+.nosignal {
+    color: lightgray;
+}
+
 .red {
     color: red;
 }

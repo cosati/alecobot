@@ -31,11 +31,11 @@ def video_stream():
 def rear_sensor():
     irSts = GPIO.input(rearSensor)
     if irSts:
-        rs = "-"
+        rs = "<td>-</td>"
     elif not irSts:
-        rs = "Stop!"
+        rs = "<td class=\"alert\">Stop!</td>"
     else:
-        rs = "No signal!"
+        rs = "<td class=\"nosignal\">No signal!</td>"
     return rs
 
 @app.route('/')
