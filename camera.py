@@ -43,7 +43,7 @@ def index():
     if irSts:
         rs = "<td class=\"alert\">Stop!</td>"
     elif not irSts:
-        rs = yield "<td>Go!</td>"
+        rs = "<td>Go!</td>"
     else:
         rs = "<td>Lost Signal!</td>"
     templateData = {
