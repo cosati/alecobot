@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 #define sensor GPIOs
-rearSensor = 7
+rearSensor = 16
 
 #initialize GPIO status variables
 irSts = 0
