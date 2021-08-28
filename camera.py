@@ -3,7 +3,7 @@ import cv2
 import numpy
 import json
 import RPi.GPIO as GPIO
-from flask import Flask, render_template, Response, stream_with_context, request, jsonfy
+from flask import Flask, render_template, Response, stream_with_context, request, jsonify
 # from flask_socketio import SocketIO, emit
 
 video = cv2.VideoCapture(0)
@@ -63,7 +63,7 @@ def video_feed():
 
 @app.route('/data_feed', methods=["GET", "POST"])
 def data_feed():
-    response = make_response(jsonfy(data))
+    response = make_response(jsonify(data))
     response.content_type = 'application/json'
     return response
 
