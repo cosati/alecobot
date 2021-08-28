@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
   $('#lightmode').on('click', function(){           
       if($(this).is(':checked')){
           $('#redslider').attr('disabled', true);
@@ -10,7 +10,7 @@ $(function(){
           $('#blueslider').attr('disabled', false);
       }
   });
-});
+});*/
 
 function requestData() {
   var requests = $.get('/data_feed');
@@ -19,6 +19,10 @@ function requestData() {
   setTimeout(requestData, 500);
   });
 }
+
+$(document).ready(function() {
+  requestData();
+});
 
 /*var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
