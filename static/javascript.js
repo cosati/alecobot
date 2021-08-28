@@ -23,8 +23,7 @@ function requestData() {
     //   // Update HTML
     //   $('#rear').html(rearIR = 1 ? "-" : "Stop!");
     // }
-    // $('#rear td').html(result.rear = 1 ? "-" : "Stop!");
-    $('#rear').html(result.rear);
+    $('#rear td').html(result.rear = 1 ? "-" : "Stop!");
 
     setTimeout(requestData, 500);
   });
