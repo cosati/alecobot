@@ -89,6 +89,7 @@ def add_message(mode):
     else: # Stop
         pilotMode = 2
     app.logger.info("Pilot Mode: " + mode)
+    return 'OK'
 
 
 app.run(host='0.0.0.0', port='5000', debug=False)
