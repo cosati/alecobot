@@ -20,7 +20,7 @@ rearSensor = 16
 irSts = 0
 
 #initialize other variables
-lightMode = 0
+pilotMode = 0
 
 #define sensor pins as input
 GPIO.setup(rearSensor, GPIO.IN)
@@ -80,12 +80,15 @@ def data_feed():
     response.content_type = 'application/json'
     return response
 
-# @app.route('/lightmode/<mode>')
-# def add_message(mode):
-#     if mode == 'auto':
-#         lightMode = 1
-#     lightMode = 0
-#     app.logger.info("Lights" + mode)
+@app.route('/pilot/<mode>')
+def add_message(mode):
+    if mode == 'auto':
+        pilotMode = 1
+    elif mode == 'manual':
+        pilotMode = 0
+    else: # Stop
+        pilotMode = 2
+    app.logger.info("Pilot Mode: " + mode)
 
 
 app.run(host='0.0.0.0', port='5000', debug=False)

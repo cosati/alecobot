@@ -41,4 +41,19 @@ $(document).ready(function() {
     }
   });
 
+  $('input[type=radio][name=mode]').change(function() {
+    if (this.value == 1) { // Manual
+      console.log("Changed to manual");
+      $.get('/pilot/manual');
+    }
+    else if (this.value == 2) { // Auto
+      console.log("Changed to autopilot");
+      $.get('/pilot/auto');
+    }
+    else { // Stop
+      console.log("Changed to manual mode");
+      $.get('/pilot/stop');
+  }
+});
+
 });
