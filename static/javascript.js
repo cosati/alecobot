@@ -11,12 +11,21 @@
       }
   });
 });*/
+let rearIR = 1
+
 
 function requestData() {
   var requests = $.get('/data_feed');
   var tm = requests.done(function (result) {
-  console.log("REAR", result.rear)  
-  setTimeout(requestData, 500);
+    console.log("REAR", result.rear);
+    
+    if (rearIR != result.rear) {
+      rearIR = result.rear // updates variable with new value
+      // Update HTML
+      $('#rear').html(rearIR = 1 ? "-" : "Stop!");
+    }
+
+    setTimeout(requestData, 500);
   });
 }
 
