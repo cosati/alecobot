@@ -41,6 +41,7 @@ $(document).ready(function() {
     }
   });
 
+  // Pilot mode | auto, manual, stop
   $('input[type=radio][name=mode]').change(function() {
     if (this.value == 1) { // Manual
       console.log("Changed to manual");
@@ -51,9 +52,20 @@ $(document).ready(function() {
       $.get('/pilot/auto');
     }
     else { // Stop
-      console.log("Changed to manual mode");
+      console.log("Stoped");
       $.get('/pilot/stop');
-  }
-});
+    }
+  });
+
+  // Setting leds intensity
+  $('.rgbslider').on('change', function() {
+    if (!lightauto) {
+      let s = $(this).attr('id');
+      let v = $(this).val();
+      let p = '/' + s + '/' + v;
+      console.log(p);
+      $.get(p);
+    };
+  });
 
 });

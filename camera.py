@@ -21,14 +21,17 @@ irSts = 0
 
 #initialize other variables
 pilotMode = 0
+ledRed = 0
+ledGreen = 0
+ledBlue = 0
 
 #define sensor pins as input
 GPIO.setup(rearSensor, GPIO.IN)
 
 dataSend = {
-    'sliderr'   : 0,
-    'sliderg'   : 0,
-    'sliderb'   : 0,
+    'sliderr'   : ledRed,
+    'sliderg'   : ledGreen,
+    'sliderb'   : ledBlue,
     'rear'      : 0,
     'front'     : 1,
     'distance'  : 10,
@@ -65,9 +68,9 @@ def video_feed():
 @app.route('/data_feed', methods=["GET", "POST"])
 def data_feed():
     dataSend = {
-    'sliderr'   : 500,
-    'sliderg'   : 300,
-    'sliderb'   : 100,
+    'sliderr'   : ledRed,
+    'sliderg'   : ledGreen,
+    'sliderb'   : ledBlue,
     'rear'      : rear_sensor(),
     'front'     : 1,
     'distance'  : 10,
@@ -80,8 +83,9 @@ def data_feed():
     response.content_type = 'application/json'
     return response
 
+# Pilot Mode
 @app.route('/pilot/<mode>')
-def add_message(mode):
+def pilote_mode(mode):
     if mode == 'auto':
         pilotMode = 1
     elif mode == 'manual':
@@ -91,5 +95,15 @@ def add_message(mode):
     app.logger.info("Pilot Mode: " + mode)
     return 'OK'
 
+# LEDs intensity
+@app.route('/<slider>/<value>')
+def rgb_value(slider, value):
+    if slider == 'redslider':
+        ledRed = value
+    elif slider == 'greenslider':
+        ledGreen = value
+    elif slider == 'blueslider':
+        ledBlue = value
+    return 'OK'
 
-app.run(host='0.0.0.0', port='5000', debug=False)
+app.run(host='0.0.0.0', port='5000', debug=True)
