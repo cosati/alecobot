@@ -9,8 +9,8 @@ function requestData() {
 
     // Sliders value
     $('#redslider').val(result.sliderr);
-    $('#redslideg').val(result.sliderg);
-    $('#redslideb').val(result.sliderb);
+    $('#greenslider').val(result.sliderg);
+    $('#blueslider').val(result.sliderb);
 
     setTimeout(requestData, 500);
   });
