@@ -16,14 +16,8 @@ function requestData() {
   var requests = $.get('/data_feed');
   var tm = requests.done(function (result) {
     console.log("REAR", result.rear);
-    
-    // if (rearIR != result.rear) {
-    //   rearIR = result.rear // updates variable with new value
-    //   // Update HTML
-    //   $('#rear').html(rearIR = 1 ? "-" : "Stop!");
-    // }
-    $('#rear').html(result.rear == 1 ? "-" : "Stop!");
-    // $('#rear').html(result.rear);
+
+    $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "alert" : "").addClass(result.rear == 1 ? "" : "alert");
 
     setTimeout(requestData, 500);
   });
