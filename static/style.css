@@ -41,7 +41,7 @@
     margin-bottom: 0;
 }
 
-.alert {
+.redalert {
     color: red;
     font-weight: bold;
 }
@@ -64,7 +64,7 @@
 
 .tinfo {
     display: block;
-    width: 130px;
+    width: 140px;
 }
 
 /* Slider RGB */

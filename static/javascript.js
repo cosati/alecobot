@@ -17,7 +17,7 @@ function requestData() {
   var tm = requests.done(function (result) {
     console.log("REAR", result.rear);
 
-    $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "alert" : "").addClass(result.rear == 1 ? "" : "alert");
+    $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
 
     setTimeout(requestData, 500);
   });
@@ -25,6 +25,19 @@ function requestData() {
 
 $(document).ready(function() {
   requestData();
+
+  $('#lightmode').on('click', function(){           
+    if($(this).is(':checked')){
+        $('#redslider').attr('disabled', true);
+        $('#greenslider').attr('disabled', true);
+        $('#blueslider').attr('disabled', true);
+    } else {
+        $('#redslider').attr('disabled', false);
+        $('#greenslider').attr('disabled', false);
+        $('#blueslider').attr('disabled', false);
+    }
+  });
+
 });
 
 /*var slider = document.getElementById("myRange");
