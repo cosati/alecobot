@@ -19,11 +19,12 @@ function requestData() {
   var tm = requests.done(function (result) {
     console.log("REAR", result.rear);
     
-    if (rearIR != result.rear) {
-      rearIR = result.rear // updates variable with new value
-      // Update HTML
-      $('#rear').html(rearIR = 1 ? "-" : "Stop!");
-    }
+    // if (rearIR != result.rear) {
+    //   rearIR = result.rear // updates variable with new value
+    //   // Update HTML
+    //   $('#rear').html(rearIR = 1 ? "-" : "Stop!");
+    // }
+    $('#rear').html(result.rear = 1 ? "-" : "Stop!");
 
     setTimeout(requestData, 500);
   });
