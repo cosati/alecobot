@@ -63,6 +63,12 @@ def video_feed():
 
 @app.route('/data_feed', methods=["GET", "POST"])
 def data_feed():
+    data = {
+    'sliderr'   : 0,
+    'sliderg'   : 0,
+    'sliderb'   : 0,
+    'rear'      : rear_sensor()
+    }
     response = make_response(jsonify(data))
     response.content_type = 'application/json'
     return response
