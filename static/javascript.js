@@ -11,7 +11,6 @@
       }
   });
 });*/
-// let rearIR = 1
 
 function requestData() {
   var requests = $.get('/data_feed');
@@ -23,7 +22,7 @@ function requestData() {
     //   // Update HTML
     //   $('#rear').html(rearIR = 1 ? "-" : "Stop!");
     // }
-    $('#rear td').html(result.rear = '1' ? "-" : "Stop!");
+    $('#rear').html(result.rear = '1' ? "-" : "Stop!");
     // $('#rear').html(result.rear);
 
     setTimeout(requestData, 500);
