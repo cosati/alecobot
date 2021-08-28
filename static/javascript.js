@@ -8,9 +8,9 @@ function requestData() {
     $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
 
     // Sliders value
-    $('#redslider').slider("value", result.sliderr);
-    $('#redslideg').slider("value", result.sliderg);
-    $('#redslideb').slider("value", result.sliderb);
+    $('#redslider').val(result.sliderr);
+    $('#redslideg').val(result.sliderg);
+    $('#redslideb').val(result.sliderb);
 
     setTimeout(requestData, 500);
   });
