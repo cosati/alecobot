@@ -24,7 +24,7 @@ function requestData() {
     //   // Update HTML
     //   $('#rear').html(rearIR = 1 ? "-" : "Stop!");
     // }
-    $('#rear').html(result.rear = 1 ? "-" : "Stop!");
+    $('#rear td').html().replace(result.rear = 1 ? "-" : "Stop!");
 
     setTimeout(requestData, 500);
   });
