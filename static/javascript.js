@@ -1,23 +1,16 @@
-/*$(function(){
-  $('#lightmode').on('click', function(){           
-      if($(this).is(':checked')){
-          $('#redslider').attr('disabled', true);
-          $('#greenslider').attr('disabled', true);
-          $('#blueslider').attr('disabled', true);
-      } else {
-          $('#redslider').attr('disabled', false);
-          $('#greenslider').attr('disabled', false);
-          $('#blueslider').attr('disabled', false);
-      }
-  });
-});*/
-
+// Receiving data from Raspberry
 function requestData() {
   var requests = $.get('/data_feed');
   var tm = requests.done(function (result) {
-    console.log("REAR", result.rear);
+    console.log("JSON", result);
 
+    // IR Rear Status
     $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
+
+    // Sliders value
+    $('#redslider').slider("value", result.sliderr);
+    $('#redslideg').slider("value", result.sliderg);
+    $('#redslideb').slider("value", result.sliderb);
 
     setTimeout(requestData, 500);
   });
@@ -26,6 +19,7 @@ function requestData() {
 $(document).ready(function() {
   requestData();
 
+  //Lights auto or manual
   $('#lightmode').on('click', function(){           
     if($(this).is(':checked')){
         $('#redslider').attr('disabled', true);
