@@ -11,6 +11,7 @@ function requestData() {
 
     // IR Rear Status
     $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
+    $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass(result.front == 0 ? "redalert" : "").addClass(result.front == 0 ? "" : "redalert");
     $('#distance').html(result.distance + 'cm')
     $('#light').html(result.light + '%')
 
