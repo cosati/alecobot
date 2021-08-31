@@ -46,11 +46,11 @@ dataSend = {
     'sliderb'   : ledBlue,
     'rear'      : 0,
     'front'     : 1,
-    'distance'  : 10,
-    'light'     : 70,
-    'lm'        : 3,
-    'rm'        : 4,
-    'init'      : 1,
+    'distance'  : distance,
+    'light'     : ldr,
+    'lm'        : ml,
+    'rm'        : mr,
+    'init'      : calib,
 }
 
 @app.before_first_request
