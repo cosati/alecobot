@@ -86,6 +86,7 @@ def data_feed():
 # Pilot Mode
 @app.route('/pilot/<mode>')
 def pilote_mode(mode):
+    global pilotMode
     if mode == 'auto':
         pilotMode = 1
     elif mode == 'manual':
@@ -98,6 +99,9 @@ def pilote_mode(mode):
 # LEDs intensity
 @app.route('/<slider>/<value>')
 def rgb_value(slider, value):
+    global ledBlue
+    global ledGreen
+    global ledRed
     if slider == 'redslider':
         ledRed = value
     elif slider == 'greenslider':
