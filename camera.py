@@ -105,6 +105,15 @@ def video_feed():
 # Send data to client
 @app.route('/data_feed', methods=["GET", "POST"])
 def data_feed():
+    global calib
+    global distance
+    global ldr
+    global mr
+    global ml
+    global rgbLeds
+    global ledRed
+    global ledGreen
+    global ledBlue
     dataSend = {
     'sliderr'   : ledRed,
     'sliderg'   : ledGreen,

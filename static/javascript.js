@@ -12,10 +12,12 @@ function requestData() {
         console.log("No data from arduino");
         $('#information').html("No data...");
         $('#information').removeClass("redalert").addClass("nosignal")
+        break;
       case 1:
         console.log("Calibrating ESCs");
         $('#information').html("Calibrating...");
         $('#information').removeClass("redalert").removeClass("nosignal");
+        break;
       default:
         console.log("Ok");
         $('#information').html("Ok");
