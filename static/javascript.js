@@ -7,13 +7,27 @@ function requestData() {
     console.log("JSON", result);
 
     // Initializing
+    switch(result.init) {
+      case -1:
+        console.log("No data from arduino");
+        $('#information').html("No data...");
+        $('#information').removeClass("redalert").addClass("nosignal")
+      case 1:
+        console.log("Calibrating ESCs");
+        $('#information').html("Calibrating...");
+        $('#information').removeClass("redalert").removeClass("nosignal");
+      default:
+        console.log("Ok");
+        $('#information').html("Ok");
+        $('#information').removeClass("redalert").removeClass("nosignal");
+    }
     $('#information').html(result.init == 1 ? "Calibrating..." : "")
 
-    // IR Rear Status
+    // Updating Sensors status
     $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
     $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass(result.front == 0 ? "redalert" : "").addClass(result.front == 0 ? "" : "redalert");
-    $('#distance').html(result.distance + 'cm')
-    $('#light').html(result.light + '%')
+    $('#distance').html(result.distance == -1 ? "No data" : result.distance + "cm").removeClass(result.distance != -1 ? "nosignal" : "").addClass(result.distance == -1 ? "" : "nosignal");
+    $('#light').html(result.light == -1 ? "No data" : result.light + '%').removeClass(result.light != -1 ? "nosignal" : "").addClass(result.light == -1 ? "" : "nosignal");
 
     // Sliders value
     if (lightauto) {
