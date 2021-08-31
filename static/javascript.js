@@ -11,6 +11,8 @@ function requestData() {
 
     // IR Rear Status
     $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
+    $('#distance').html(result.distance + 'cm')
+    $('#light').html(result.light + '%')
 
     // Sliders value
     if (lightauto) {
@@ -52,7 +54,7 @@ $(document).ready(function() {
       $.get('/pilot/auto');
     }
     else { // Stop
-      console.log("Stoped");
+      console.log("Stopped");
       $.get('/pilot/stop');
     }
   });
