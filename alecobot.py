@@ -4,6 +4,9 @@ import cv2
 import numpy
 import json
 import logging
+import time
+import threading
+import serial
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, Response, stream_with_context, request, jsonify
 
@@ -25,6 +28,15 @@ ledRed = 0
 ledGreen = 0
 ledBlue = 0
 
+#initialize Arduino sensors variables
+calib = -1
+distance = -1
+ldr = -1
+mr = 0
+ml = 0
+rgbLeds = -1
+
+
 #define sensor pins as input
 GPIO.setup(rearSensor, GPIO.IN)
 
@@ -34,12 +46,38 @@ dataSend = {
     'sliderb'   : ledBlue,
     'rear'      : 0,
     'front'     : 1,
-    'distance'  : 10,
-    'light'     : 70,
-    'lm'        : 3,
-    'rm'        : 4,
-    'init'      : 1,
+    'distance'  : distance,
+    'light'     : ldr,
+    'lm'        : ml,
+    'rm'        : mr,
+    'init'      : calib,
 }
+
+@app.before_first_request
+def arduino_job():
+    def run_job():
+        ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        ser.flush()
+        global calib
+        global distance
+        global ldr
+        global mr
+        global ml
+        global rgbLeds
+        while True:
+            if ser.in_waiting > 0:
+                line = ser.readline().decode('utf-8').rstrip()
+                arr = line.split(';')
+                calib = arr[0]
+                distance = arr[1]
+                ldr = arr[2]
+                mr = arr[3]
+                ml = arr[4]
+                rgbLeds = arr[5]
+                time.sleep(0.5)
+
+    thread = threading.Thread(target=run_job)
+    thread.start()
 
 def video_stream():
     while True:
@@ -67,17 +105,26 @@ def video_feed():
 # Send data to client
 @app.route('/data_feed', methods=["GET", "POST"])
 def data_feed():
+    global calib
+    global distance
+    global ldr
+    global mr
+    global ml
+    global rgbLeds
+    global ledRed
+    global ledGreen
+    global ledBlue
     dataSend = {
     'sliderr'   : ledRed,
     'sliderg'   : ledGreen,
     'sliderb'   : ledBlue,
     'rear'      : rear_sensor(),
     'front'     : 1,
-    'distance'  : 10,
-    'light'     : 70,
-    'lm'        : 3,
-    'rm'        : 4,
-    'init'      : 1,
+    'distance'  : distance,
+    'light'     : ldr,
+    'lm'        : ml,
+    'rm'        : mr,
+    'init'      : calib,
     }
     response = make_response(jsonify(dataSend))
     response.content_type = 'application/json'
@@ -103,11 +150,11 @@ def rgb_value(slider, value):
     global ledGreen
     global ledRed
     if slider == 'redslider':
-        ledRed = value
+        ledRed = int(value)
     elif slider == 'greenslider':
-        ledGreen = value
+        ledGreen = int(value)
     elif slider == 'blueslider':
-        ledBlue = value
+        ledBlue = int(value)
     return 'OK'
 
 app.run(host='0.0.0.0', port='5000', debug=False)

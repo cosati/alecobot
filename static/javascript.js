@@ -11,25 +11,25 @@ function requestData() {
       case -1:
         console.log("No data from arduino");
         $('#information').html("No data...");
-        $('#information').removeClass("redalert").addClass("nosignal")
+        $('#information').removeClass().addClass("nosignal")
         break;
       case 1:
         console.log("Calibrating ESCs");
         $('#information').html("Calibrating...");
-        $('#information').removeClass("redalert").removeClass("nosignal");
+        $('#information').removeClass().removeClass("nosignal");
         break;
       default:
         console.log("Ok");
         $('#information').html("Ok");
-        $('#information').removeClass("redalert").removeClass("nosignal");
+        $('#information').removeClass().removeClass("nosignal");
     }
     $('#information').html(result.init == 1 ? "Calibrating..." : "")
 
     // Updating Sensors status
-    $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass(result.rear == 1 ? "redalert" : "").addClass(result.rear == 1 ? "" : "redalert");
-    $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass(result.front == 0 ? "redalert" : "").addClass(result.front == 0 ? "" : "redalert");
-    $('#distance').html(result.distance == -1 ? "No data" : result.distance + "cm").removeClass(result.distance != -1 ? "nosignal" : "").addClass(result.distance == -1 ? "" : "nosignal");
-    $('#light').html(result.light == -1 ? "No data" : result.light + '%').removeClass(result.light != -1 ? "nosignal" : "").addClass(result.light == -1 ? "" : "nosignal");
+    $('#rear').html(result.rear == 1 ? "-" : "Stop!").removeClass().addClass(result.rear == 1 ? "" : "redalert");
+    $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass().addClass(result.front == 0 ? "" : "redalert");
+    $('#distance').html(result.distance == -1 ? "No data" : result.distance + "cm").removeClass().addClass(result.distance == -1 ? "nosignal" : "");
+    $('#light').html(result.light == -1 ? "No data" : result.light + '%').removeClass().addClass(result.light == -1 ? "nosignal" : "");
 
     // Sliders value
     if (lightauto) {
