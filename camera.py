@@ -4,6 +4,7 @@ import cv2
 import numpy
 import json
 import logging
+import sys
 import time
 import threading
 import serial
@@ -67,6 +68,7 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
+                print(line, file=sys.stdout)
                 arr = line.split(';')
                 calib = arr[0]
                 distance = arr[1]
