@@ -68,6 +68,10 @@
     width: 140px;
 }
 
+td.update {
+    text-align: right;
+}
+
 .tdist {
     width: 160px !important;
 }

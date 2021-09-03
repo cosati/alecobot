@@ -4,6 +4,7 @@ import cv2
 import numpy
 import json
 import logging
+import sys
 import time
 import threading
 import serial
@@ -58,6 +59,7 @@ def arduino_job():
     def run_job():
         ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
         ser.flush()
+        global dataSend
         global calib
         global distance
         global ldr
@@ -67,14 +69,20 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
-                arr = line.split(';')
-                calib = arr[0]
-                distance = arr[1]
-                ldr = arr[2]
-                mr = arr[3]
-                ml = arr[4]
-                rgbLeds = arr[5]
-                time.sleep(0.5)
+                # time.sleep(0.1)
+                try :
+                    arr = line.split(';')
+                    calib = arr[0]
+                    distance = arr[1]
+                    ldr = arr[2]
+                    mr = arr[3]
+                    ml = arr[4]
+                    rgbLeds = arr[5]
+                except IndexError:
+                    pass
+                ser.write(b'' + bytes(dataSend['sliderr']) + b';' + bytes(dataSend['sliderg']) + b';' + bytes(dataSend['sliderb']) + b'\n')
+                # print(line, file=sys.stdout)                
+                # time.sleep(0.5)
 
     thread = threading.Thread(target=run_job)
     thread.start()

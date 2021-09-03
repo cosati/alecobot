@@ -30,13 +30,15 @@ function requestData() {
     $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass().addClass(result.front == 0 ? "" : "redalert");
     $('#distance').html(result.distance == -1 ? "No data" : result.distance + "cm").removeClass().addClass(result.distance == -1 ? "nosignal" : "");
     $('#light').html(result.light == -1 ? "No data" : result.light + '%').removeClass().addClass(result.light == -1 ? "nosignal" : "");
+    $('#leftmotor').html(result.ml == -1 ? "No data" : result.ml + '%').removeClass();
+    $('#rightmotor').html(result.mr == -1 ? "No data" : result.mr + '%').removeClass();
 
     // Sliders value
     if (lightauto) {
-      $('#redslider').val(result.sliderr);
-      $('#greenslider').val(result.sliderg);
-      $('#blueslider').val(result.sliderb);
-    }
+      $('#redslider').val(result.autolight);
+      $('#greenslider').val(result.autolight);
+      $('#blueslider').val(result.autolight);
+    } 
 
     setTimeout(requestData, 500);
   });
