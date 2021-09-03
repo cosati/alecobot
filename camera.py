@@ -68,6 +68,7 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
+                time.sleep(1)
                 arr = line.split(';')
                 calib = arr[0]
                 distance = arr[1]
