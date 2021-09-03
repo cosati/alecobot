@@ -68,9 +68,6 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
-                ser.write(b'' + dataSend.sliderr + b';' + dataSend.sliderg + b';' + dataSend.sliderb + b'\n')
-                # print(line, file=sys.stdout)                
-                # time.sleep(0.5)
                 arr = line.split(';')
                 calib = arr[0]
                 distance = arr[1]
@@ -78,6 +75,9 @@ def arduino_job():
                 mr = arr[3]
                 ml = arr[4]
                 rgbLeds = arr[5]
+                ser.write(b'' + dataSend.sliderr + b';' + dataSend.sliderg + b';' + dataSend.sliderb + b'\n')
+                # print(line, file=sys.stdout)                
+                # time.sleep(0.5)
 
     thread = threading.Thread(target=run_job)
     thread.start()
