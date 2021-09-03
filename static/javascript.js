@@ -30,8 +30,8 @@ function requestData() {
     $('#front').html(result.front == 0 ? "Go" : "Stop!").removeClass().addClass(result.front == 0 ? "" : "redalert");
     $('#distance').html(result.distance == -1 ? "No data" : result.distance + "cm").removeClass().addClass(result.distance == -1 ? "nosignal" : "");
     $('#light').html(result.light == -1 ? "No data" : result.light + '%').removeClass().addClass(result.light == -1 ? "nosignal" : "");
-    $('#leftmotor').html(result.ml == -1 ? "No data" : result.ml + '%').removeClass();
-    $('#rightmotor').html(result.mr == -1 ? "No data" : result.mr + '%').removeClass();
+    $('#leftmotor').html(result.lm == -1 ? "No data" : result.lm + '%').removeClass();
+    $('#rightmotor').html(result.rm == -1 ? "No data" : result.rm + '%').removeClass();
 
     // Sliders value
     if (lightauto) {
