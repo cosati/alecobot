@@ -68,7 +68,8 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
-                print(line, file=sys.stdout)
+                # print(line, file=sys.stdout)                
+                time.sleep(0.1)
                 arr = line.split(';')
                 calib = arr[0]
                 distance = arr[1]
@@ -76,7 +77,6 @@ def arduino_job():
                 mr = arr[3]
                 ml = arr[4]
                 rgbLeds = arr[5]
-                time.sleep(0.5)
 
     thread = threading.Thread(target=run_job)
     thread.start()
@@ -159,4 +159,4 @@ def rgb_value(slider, value):
         ledBlue = int(value)
     return 'OK'
 
-app.run(host='0.0.0.0', port='5000', debug=True)
+app.run(host='0.0.0.0', port='5000', debug=False)
