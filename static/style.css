@@ -29,12 +29,13 @@
 
 .info table {
     color: #00FF00;
-    margin-right: 20px;
+    margin-right: 10px;
     float: left;
 }
 
 .info td {
     padding: 0 5px;
+    font-size: 14px;
 }
 
 .info label {
@@ -65,6 +66,10 @@
 .tinfo {
     display: block;
     width: 140px;
+}
+
+.tdist {
+    width: 160px !important;
 }
 
 /* Slider RGB */
