@@ -68,14 +68,17 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
-                time.sleep(0.1)
-                arr = line.split(';')
-                calib = arr[0]
-                distance = arr[1]
-                ldr = arr[2]
-                mr = arr[3]
-                ml = arr[4]
-                rgbLeds = arr[5]
+                # time.sleep(0.1)
+                try :
+                    arr = line.split(';')
+                    calib = arr[0]
+                    distance = arr[1]
+                    ldr = arr[2]
+                    mr = arr[3]
+                    ml = arr[4]
+                    rgbLeds = arr[5]
+                except IndexError:
+                    pass
                 ser.write(b'' + dataSend.sliderr + b';' + dataSend.sliderg + b';' + dataSend.sliderb + b'\n')
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
