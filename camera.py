@@ -59,6 +59,7 @@ def arduino_job():
     def run_job():
         ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
         ser.flush()
+        global dataSend
         global calib
         global distance
         global ldr
