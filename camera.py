@@ -68,7 +68,7 @@ def arduino_job():
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
-                ser.write(b'' + dataSend.sliderr + b';' + dataSend.sliderg + b';' + dataSend.sliderb)
+                ser.write(b'' + dataSend.sliderr + b';' + dataSend.sliderg + b';' + dataSend.sliderb + b'\n')
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
                 arr = line.split(';')
