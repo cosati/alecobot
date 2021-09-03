@@ -52,6 +52,7 @@ dataSend = {
     'lm'        : ml,
     'rm'        : mr,
     'init'      : calib,
+    'autolight' : 0,
 }
 
 @app.before_first_request
@@ -133,6 +134,7 @@ def data_feed():
     'lm'        : ml,
     'rm'        : mr,
     'init'      : calib,
+    'autolight' : rgbLeds,
     }
     response = make_response(jsonify(dataSend))
     response.content_type = 'application/json'
