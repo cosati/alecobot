@@ -67,6 +67,9 @@ def arduino_job():
         global mr
         global ml
         global rgbLeds
+        global ledRed
+        global ledGreen
+        global ledBlue
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
@@ -81,7 +84,7 @@ def arduino_job():
                     rgbLeds = arr[5]
                 except IndexError:
                     pass
-                serialWrite = bytes(str(500) + ';' + str(dataSend['sliderg']) + ';' + str(dataSend['sliderb']) + '\n', encoding='utf-8')
+                serialWrite = bytes(str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + '\n', encoding='utf-8')
                 ser.write(serialWrite)
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
