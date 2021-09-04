@@ -176,8 +176,14 @@ def rgb_value(slider, value):
 def led_mode(value):
     global lightAuto
     global dataSend
+    global ledRed
+    global ledGreen
+    global ledBlue
     if value == 'man':
         lightAuto = False
+        ledRed = 0
+        ledGreen = 0
+        ledBlue = 0
     elif value == 'auto':
         lightAuto = True
     return 'OK'
