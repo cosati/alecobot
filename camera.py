@@ -81,7 +81,7 @@ def arduino_job():
                     rgbLeds = arr[5]
                 except IndexError:
                     pass
-                str = dataSend['sliderr'] + ';' + dataSend['sliderg'] + ';' + dataSend['sliderb'] + '\n'
+                str = str(dataSend['sliderr']) + ';' + str(dataSend['sliderg']) + ';' + str(dataSend['sliderb']) + '\n'
                 ser.write(bytes(str))
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
