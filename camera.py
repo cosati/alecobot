@@ -175,15 +175,16 @@ def rgb_value(slider, value):
 @app.route('/ledsmode/<value>')
 def led_mode(value):
     global lightAuto
+    global rgbLeds
     global dataSend
     global ledRed
     global ledGreen
     global ledBlue
     if value == 'man':
         lightAuto = False
-        ledRed = lightAuto
-        ledGreen = lightAuto
-        ledBlue = lightAuto
+        ledRed = rgbLeds
+        ledGreen = rgbLeds
+        ledBlue = rgbLeds
     elif value == 'auto':
         lightAuto = True
     return 'OK'
