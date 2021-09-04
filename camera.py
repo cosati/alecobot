@@ -128,9 +128,9 @@ def data_feed():
     global ledGreen
     global ledBlue
     dataSend = {
-    'sliderr'   : ledRed,
-    'sliderg'   : ledGreen,
-    'sliderb'   : ledBlue,
+    'sliderr'   : rgbLeds if lightAuto else ledRed,
+    'sliderg'   : rgbLeds if lightAuto else ledGreen,
+    'sliderb'   : rgbLeds if lightAuto else ledBlue,
     'rear'      : rear_sensor(),
     'front'     : 1,
     'distance'  : distance,
