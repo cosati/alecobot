@@ -181,9 +181,9 @@ def led_mode(value):
     global ledBlue
     if value == 'man':
         lightAuto = False
-        ledRed = 0
-        ledGreen = 0
-        ledBlue = 0
+        ledRed = lightAuto
+        ledGreen = lightAuto
+        ledBlue = lightAuto
     elif value == 'auto':
         lightAuto = True
     return 'OK'
