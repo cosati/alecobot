@@ -82,7 +82,7 @@ def arduino_job():
                 except IndexError:
                     pass
                 #ser.write(bytes(dataSend['sliderr']) + b';' + bytes(dataSend['sliderg']) + b';' + bytes(dataSend['sliderb']) + b'\n')
-                ser.write(b'500;500;500\n')
+                ser.write(b'0;500;500\n')
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
 
