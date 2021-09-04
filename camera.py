@@ -28,6 +28,7 @@ pilotMode = 0
 ledRed = 0
 ledGreen = 0
 ledBlue = 0
+lightAuto = False
 
 #initialize Arduino sensors variables
 calib = -1
@@ -52,7 +53,6 @@ dataSend = {
     'lm'        : ml,
     'rm'        : mr,
     'init'      : calib,
-    'autolight' : 0,
 }
 
 @app.before_first_request
@@ -84,7 +84,7 @@ def arduino_job():
                     rgbLeds = arr[5]
                 except IndexError:
                     pass
-                serialWrite = bytes(str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + '\n', encoding='utf-8')
+                serialWrite = bytes(str(1 if lightAuto else 0) + ';' + str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + '\n', encoding='utf-8')
                 ser.write(serialWrite)
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
@@ -169,6 +169,17 @@ def rgb_value(slider, value):
         ledGreen = int(value)
     elif slider == 'blueslider':
         ledBlue = int(value)
+    return 'OK'
+
+# Leds control mode
+@app.route('/ledsmode/<value>')
+def led_mode(value):
+    global lightAuto
+    global dataSend
+    if value == 'man':
+        lightAuto = False
+    elif value == 'auto':
+        lightAuto = True
     return 'OK'
 
 app.run(host='0.0.0.0', port='5000', debug=False)

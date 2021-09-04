@@ -48,16 +48,18 @@ $(document).ready(function() {
   requestData();
 
   //Lights auto or manual
-  $('#lightmode').on('click', function(){           
+  $('#lightmode').on('click', function(){  ///ledsmode/<value>          
     if($(this).is(':checked')){
       $('#redslider').attr('disabled', true);
       $('#greenslider').attr('disabled', true);
       $('#blueslider').attr('disabled', true);
+      $.get('/ledsmode/auto');
       lightauto = true
     } else {
       $('#redslider').attr('disabled', false);
       $('#greenslider').attr('disabled', false);
       $('#blueslider').attr('disabled', false);
+      $.get('/ledsmode/man');
       lightauto = false
     }
   });
