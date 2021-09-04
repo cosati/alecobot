@@ -81,7 +81,7 @@ def arduino_job():
                     rgbLeds = arr[5]
                 except IndexError:
                     pass
-                ser.write(b'' + bytes(str(rgbLeds)) + b';' + bytes(str(rgbLeds)) + b';' + bytes(str(rgbLeds)) + b'\n')
+                ser.write(b'' + bytes(str(rgbLeds), encoding='utf8') + b';' + bytes(str(rgbLeds), encoding='utf8') + b';' + bytes(str(rgbLeds), encoding='utf8') + b'\n')
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
 
