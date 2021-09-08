@@ -1,5 +1,8 @@
 // Receiving data from Raspberry
 let lightauto = false
+var keys = {
+  'w': false,
+}
 
 function requestData() {
   var requests = $.get('/data_feed');
@@ -90,5 +93,27 @@ $(document).ready(function() {
       $.get(p);
     };
   });
+
+});
+
+document.addEventListener("keydown", function(e) {
+  let k = e.key;
+
+  if (!keys[k]) {
+    keys[k] = true;
+    let p = '/keydown/' + k;
+    console.log(p);
+    $.get(p);
+  }
+
+});
+
+document.addEventListener("keydown", function(e) {
+  let k = e.key;
+
+  keys[k] = false;
+  let p = '/keyup/' + k;
+  console.log(p);
+  $.get(p);
 
 });

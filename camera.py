@@ -189,4 +189,14 @@ def led_mode(value):
         lightAuto = True
     return 'OK'
 
+@app.route('/keydown/<key>')
+def key_down(key) :
+
+    return 'Ok'
+
+@app.route('/keyup/<key>')
+def key_up(key) :
+
+    return 'Ok'
+
 app.run(host='0.0.0.0', port='5000', debug=False)
