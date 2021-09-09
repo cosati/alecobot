@@ -108,7 +108,7 @@ document.addEventListener("keydown", function(e) {
 
 });
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keyup", function(e) {
   let k = e.key;
 
   keys[k] = false;
