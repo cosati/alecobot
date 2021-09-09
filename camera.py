@@ -166,9 +166,9 @@ def pilote_mode(mode):
     if mode == 'auto':
         uno_commands['pilotMode'] = 1
     elif mode == 'manual':
-        uno_commands['pilotMode'] = 0
-    else: # Stop
         uno_commands['pilotMode'] = 2
+    else: # Stop
+        uno_commands['pilotMode'] = 0
     app.logger.info("Pilot Mode: " + mode)
     return 'OK'
 
