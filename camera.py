@@ -24,7 +24,7 @@ rearSensor = 16
 irSts = 0
 
 #initialize other variables
-pilotMode = 0
+#pilotMode = 0
 ledRed = 0
 ledGreen = 0
 ledBlue = 0
@@ -37,7 +37,13 @@ ldr = -1
 mr = 0
 ml = 0
 rgbLeds = -1
-
+uno_commands = {
+    'piloteMode': 0,
+    'ArrowUp'   : False,
+    'ArrowDown' : False,
+    'ArrowLeft' : False,
+    'ArrowRight': False,
+}
 
 #define sensor pins as input
 GPIO.setup(rearSensor, GPIO.IN)
@@ -70,6 +76,7 @@ def arduino_job():
         global ledRed
         global ledGreen
         global ledBlue
+        global uno_commands
         while True:
             if ser.in_waiting > 0:
                 line = ser.readline().decode('utf-8').rstrip()
@@ -84,7 +91,15 @@ def arduino_job():
                     rgbLeds = arr[5]
                 except IndexError:
                     pass
-                serialWrite = bytes(str(1 if lightAuto else 0) + ';' + str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + '\n', encoding='utf-8')
+                dataSerial = str(1 if lightAuto else 0) + ';' 
+                dataSerial += str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + ';' 
+                dataSerial += str(uno_commands['piloteMode']) + ';' 
+                dataSerial += str(1 if uno_commands['ArrowUp'] else 0) + ';' 
+                dataSerial += str(1 if uno_commands['ArrowDown'] else 0) + ';' 
+                dataSerial += str(1 if uno_commands['ArrowLeft'] else 0) + ';' 
+                dataSerial += str(1 if uno_commands['ArrowRight'] else 0) + ';' 
+                dataSerial += '\n'
+                serialWrite = bytes(dataSerial, encoding='utf-8')
                 ser.write(serialWrite)
                 # print(line, file=sys.stdout)                
                 # time.sleep(0.5)
@@ -147,13 +162,13 @@ def data_feed():
 # Pilot Mode
 @app.route('/pilot/<mode>')
 def pilote_mode(mode):
-    global pilotMode
+    global uno_commands
     if mode == 'auto':
-        pilotMode = 1
+        uno_commands['pilotMode'] = 1
     elif mode == 'manual':
-        pilotMode = 0
+        uno_commands['pilotMode'] = 0
     else: # Stop
-        pilotMode = 2
+        uno_commands['pilotMode'] = 2
     app.logger.info("Pilot Mode: " + mode)
     return 'OK'
 
@@ -191,12 +206,14 @@ def led_mode(value):
 
 @app.route('/keydown/<key>')
 def key_down(key) :
-
+    global uno_commands
+    uno_commands[key] = True
     return 'Ok'
 
 @app.route('/keyup/<key>')
 def key_up(key) :
-
+    global uno_commands
+    uno_commands[key] = False
     return 'Ok'
 
 app.run(host='0.0.0.0', port='5000', debug=False)
