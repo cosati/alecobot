@@ -99,7 +99,7 @@ def arduino_job():
                 dataSerial += str(1 if uno_commands['ArrowLeft'] else 0) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowRight'] else 0) 
                 dataSerial += '\n'
-                print(dataSerial, file=sys.stdout)
+                #print(dataSerial, file=sys.stdout)
                 serialWrite = bytes(dataSerial, encoding='utf-8')
                 ser.write(serialWrite)
                 # print(line, file=sys.stdout)                
@@ -217,4 +217,4 @@ def key_up(key) :
     uno_commands[key] = False
     return 'keyup'
 
-app.run(host='0.0.0.0', port='5000', debug=True)
+app.run(host='0.0.0.0', port='5000', debug=False)
