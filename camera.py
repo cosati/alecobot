@@ -97,7 +97,7 @@ def arduino_job():
                 dataSerial += str(1 if uno_commands['ArrowUp'] else 0) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowDown'] else 0) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowLeft'] else 0) + ';' 
-                dataSerial += str(1 if uno_commands['ArrowRight'] else 0) + ';' 
+                dataSerial += str(1 if uno_commands['ArrowRight'] else 0) 
                 dataSerial += '\n'
                 serialWrite = bytes(dataSerial, encoding='utf-8')
                 ser.write(serialWrite)
@@ -170,7 +170,7 @@ def pilote_mode(mode):
     else: # Stop
         uno_commands['pilotMode'] = 0
     app.logger.info("Pilot Mode: " + mode)
-    return 'OK'
+    return 'OK pilote mode'
 
 # LEDs intensity
 @app.route('/<slider>/<value>')
@@ -184,7 +184,7 @@ def rgb_value(slider, value):
         ledGreen = int(value)
     elif slider == 'blueslider':
         ledBlue = int(value)
-    return 'OK'
+    return 'OK set slider'
 
 # Leds control mode
 @app.route('/ledsmode/<value>')
@@ -202,18 +202,18 @@ def led_mode(value):
         ledBlue = rgbLeds
     elif value == 'auto':
         lightAuto = True
-    return 'OK'
+    return 'OK led mode'
 
 @app.route('/keydown/<key>')
 def key_down(key) :
     global uno_commands
     uno_commands[key] = True
-    return 'Ok'
+    return 'Ok down'
 
 @app.route('/keyup/<key>')
 def key_up(key) :
     global uno_commands
     uno_commands[key] = False
-    return 'Ok'
+    return 'Ok up'
 
 app.run(host='0.0.0.0', port='5000', debug=False)
