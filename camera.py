@@ -184,7 +184,7 @@ def rgb_value(slider, value):
         ledGreen = int(value)
     elif slider == 'blueslider':
         ledBlue = int(value)
-    return 'OK set slider'
+    return 'slider'
 
 # Leds control mode
 @app.route('/ledsmode/<value>')
@@ -202,18 +202,18 @@ def led_mode(value):
         ledBlue = rgbLeds
     elif value == 'auto':
         lightAuto = True
-    return 'OK led mode'
+    return 'ledmode'
 
 @app.route('/keydown/<key>')
 def key_down(key) :
     global uno_commands
     uno_commands[key] = True
-    return 'Ok down'
+    return 'keydown'
 
 @app.route('/keyup/<key>')
 def key_up(key) :
     global uno_commands
     uno_commands[key] = False
-    return 'Ok up'
+    return 'keyup'
 
 app.run(host='0.0.0.0', port='5000', debug=False)
