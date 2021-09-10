@@ -38,7 +38,7 @@ mr = 0
 ml = 0
 rgbLeds = -1
 uno_commands = {
-    'piloteMode': 0,
+    'pilotMode': 0,
     'ArrowUp'   : False,
     'ArrowDown' : False,
     'ArrowLeft' : False,
@@ -93,7 +93,7 @@ def arduino_job():
                     pass
                 dataSerial = str(1 if lightAuto else 0) + ';' 
                 dataSerial += str(ledRed) + ';' + str(ledGreen) + ';' + str(ledBlue) + ';' 
-                dataSerial += str(uno_commands['piloteMode']) + ';' 
+                dataSerial += str(uno_commands['pilotMode']) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowUp'] else 0) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowDown'] else 0) + ';' 
                 dataSerial += str(1 if uno_commands['ArrowLeft'] else 0) + ';' 
